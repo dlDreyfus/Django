@@ -1,0 +1,128 @@
+/* Tema inspirado no padrão Gov.br */
+:root {
+    --gov-blue: #1351B4;
+    --gov-dark-blue: #071D41;
+    --gov-light-gray: #f8f9fa;
+    --gov-text: #333;
+    --gov-border: #ccc;
+    --gov-hover: #0c326f;
+}
+
+body {
+    font-family: 'Segoe UI', 'Open Sans', 'Helvetica Neue', sans-serif;
+    color: var(--gov-text);
+    background-color: #fff;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    color: var(--gov-dark-blue);
+    font-weight: 700;
+}
+
+a {
+    color: var(--gov-blue);
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+    color: var(--gov-hover);
+}
+
+/* Botões no padrão Gov.br (arredondados e azul sólido) */
+.btn-primary {
+    background-color: var(--gov-blue) !important;
+    border-color: var(--gov-blue) !important;
+    border-radius: 24px !important;
+    padding: 8px 24px !important;
+    font-weight: 600 !important;
+}
+
+.btn-primary:hover {
+    background-color: var(--gov-hover) !important;
+    border-color: var(--gov-hover) !important;
+}
+
+.btn-outline-secondary {
+    border-radius: 24px !important;
+    color: var(--gov-dark-blue) !important;
+    border-color: var(--gov-dark-blue) !important;
+}
+
+.btn-outline-secondary:hover {
+    background-color: var(--gov-dark-blue) !important;
+    color: #fff !important;
+}
+
+/* Cards e Containers */
+.card {
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    margin-bottom: 20px;
+}
+
+.card-header {
+    background-color: var(--gov-light-gray);
+    border-bottom: 1px solid #e0e0e0;
+    color: var(--gov-dark-blue);
+    font-weight: 700;
+    font-size: 1.1rem;
+}
+
+/* Tabelas */
+.table thead th {
+    background-color: var(--gov-light-gray);
+    color: var(--gov-dark-blue);
+    border-bottom: 2px solid var(--gov-blue);
+    vertical-align: middle;
+}
+
+.table-striped tbody tr:nth-of-type(odd) {
+    background-color: rgba(0,0,0,.02);
+}
+
+/* Estilos específicos para Detalhes do Contrato (migrados do HTML) */
+.card-info {
+    background-color: #fff;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    margin-bottom: 30px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+}
+
+.card-info h2 {
+    margin-top: 0;
+    color: var(--gov-blue);
+    font-size: 1.5rem;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+}
+
+.info-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+}
+
+.info-item label {
+    display: block;
+    font-size: 0.85rem;
+    color: #666;
+    font-weight: 600;
+    margin-bottom: 4px;
+}
+
+.info-item span {
+    font-size: 1.1rem;
+    color: #333;
+}
+
+.btn-voltar {
+    display: inline-block;
+    margin-bottom: 20px;
+    color: var(--gov-blue);
+    font-weight: 600;
+}
