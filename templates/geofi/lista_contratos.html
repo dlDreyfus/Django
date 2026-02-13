@@ -12,6 +12,10 @@
     <link rel="stylesheet" href="{% static 'geofi/css/style.css' %}">
     <!-- Chart.js -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Hammer.js (necessário para gestos de zoom no Chart.js) -->
+    <script src="https://cdn.jsdelivr.net/npm/hammerjs@2.0.8/hammer.min.js"></script>
+    <!-- Chart.js Zoom Plugin -->
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-zoom@2.0.1/dist/chartjs-plugin-zoom.min.js"></script>
 
     <style>
         .chart-wrapper {
@@ -30,8 +34,13 @@
 
         <!-- Gráfico Timeline -->
         <div class="card mb-4">
-            <div class="card-header">
-                Timeline Comparativa: Previsto vs Liquidado (2026)
+            <div class="card-header d-flex justify-content-between align-items-center">
+                <span>Timeline Comparativa: Previsto vs Liquidado (2026)</span>
+                <div class="btn-group">
+                    <button onclick="zoomIn()" class="btn btn-sm btn-outline-secondary" title="Aumentar Zoom"><i class="bi bi-zoom-in"></i></button>
+                    <button onclick="zoomOut()" class="btn btn-sm btn-outline-secondary" title="Diminuir Zoom"><i class="bi bi-zoom-out"></i></button>
+                    <button onclick="resetZoom()" class="btn btn-sm btn-outline-secondary">Restaurar</button>
+                </div>
             </div>
             <div class="card-body">
                 <div class="chart-wrapper">
@@ -150,7 +159,7 @@
         const dataPrevisto = JSON.parse(document.getElementById('chart-data-previsto').textContent);
 
         const ctx = document.getElementById('timelineChart').getContext('2d');
-        new Chart(ctx, {
+        const myChart = new Chart(ctx, {
             type: 'line',
             data: {
                 labels: labels,
@@ -170,8 +179,34 @@
             },
             options: {
                 responsive: true,
-                maintainAspectRatio: false
+                maintainAspectRatio: false,
+                plugins: {
+                    zoom: {
+                        zoom: {
+                            wheel: { enabled: true },
+                            pinch: { enabled: true },
+                            mode: 'xy',
+                        },
+                        pan: {
+                            enabled: true,
+                            mode: 'xy',
+                            threshold: 10
+                        }
+                    }
+                }
             }
         });
+
+        function zoomIn() {
+            myChart.zoom(1.1); // Aumenta o zoom em 10%
+        }
+
+        function zoomOut() {
+            myChart.zoom(0.9); // Diminui o zoom em 10%
+        }
+
+        function resetZoom() {
+            myChart.resetZoom();
+        }
     </script>
 {% endblock %}
