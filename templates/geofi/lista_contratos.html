@@ -13,6 +13,19 @@
     <!-- Chart.js -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
+    <style>
+        .chart-wrapper {
+            position: relative;
+            height: 300px; /* Altura maior para melhor visualização no celular */
+            width: 100%;
+        }
+        @media (min-width: 768px) {
+            .chart-wrapper {
+                height: 250px; /* Mantém o gráfico mais "achatado" no desktop */
+            }
+        }
+    </style>
+
     <div class="container mt-4">
 
         <!-- Gráfico Timeline -->
@@ -21,7 +34,9 @@
                 Timeline Comparativa: Previsto vs Liquidado (2026)
             </div>
             <div class="card-body">
-                <canvas id="timelineChart"></canvas>
+                <div class="chart-wrapper">
+                    <canvas id="timelineChart"></canvas>
+                </div>
             </div>
         </div>
 
@@ -155,7 +170,7 @@
             },
             options: {
                 responsive: true,
-                aspectRatio: 4.5
+                maintainAspectRatio: false
             }
         });
     </script>
