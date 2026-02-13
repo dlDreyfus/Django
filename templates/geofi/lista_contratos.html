@@ -50,13 +50,13 @@
         </div>
 
         <!-- Seção de Filtros e Tabela -->
-        <div class="card">
+        <div class="card" id="relacao-contratos">
             <div class="card-header">
                 Relação de Contratos
             </div>
             <div class="card-body">
                 <!-- Formulário de Filtros (simplificado) -->
-                <form method="get" class="mb-4 row g-3">
+                <form method="get" class="mb-4 row g-3" id="formFiltros">
                     <div class="col-md-4">
                         <label for="nomeUasg" class="form-label">Filtrar por Nome UASG</label>
                         <select name="nomeUasg" id="nomeUasg" class="form-select">
@@ -72,7 +72,7 @@
                     </div>
                     <div class="col-md-4 align-self-end d-flex gap-2">
                         <button type="submit" class="btn btn-primary flex-grow-1">Filtrar</button>
-                        <a href="{% url 'lista_contratos' %}" class="btn btn-outline-secondary flex-grow-1">Limpar Filtros</a>
+                        <a href="{% url 'lista_contratos' %}" class="btn btn-outline-secondary flex-grow-1" onclick="saveScroll()">Limpar Filtros</a>
                     </div>
                 </form>
 
@@ -86,7 +86,7 @@
                                 <th>PI</th>
                                 <th>Objeto</th>
                                 <th>
-                                    <a href="?{{ url_ordenacao_inicio }}" class="text-decoration-none text-dark">
+                                    <a href="?{{ url_ordenacao_inicio }}" class="text-decoration-none text-dark" onclick="saveScroll()">
                                         Início
                                         {% if ordenacao == 'inicio_asc' %}
                                             <i class="bi bi-sort-up"></i>
@@ -98,7 +98,7 @@
                                     </a>
                                 </th>
                                 <th>
-                                    <a href="?{{ url_ordenacao_fim }}" class="text-decoration-none text-dark">
+                                    <a href="?{{ url_ordenacao_fim }}" class="text-decoration-none text-dark" onclick="saveScroll()">
                                         Fim
                                         {% if ordenacao == 'fim_asc' %}
                                             <i class="bi bi-sort-up"></i>
@@ -110,7 +110,7 @@
                                     </a>
                                 </th>
                                 <th class="text-end">
-                                    <a href="?{{ url_ordenacao_valor }}" class="text-decoration-none text-dark">
+                                    <a href="?{{ url_ordenacao_valor }}" class="text-decoration-none text-dark" onclick="saveScroll()">
                                         Valor Mensal Previsto
                                         {% if ordenacao == 'menor_valor' %}
                                             <i class="bi bi-sort-up"></i>
@@ -208,5 +208,24 @@
         function resetZoom() {
             myChart.resetZoom();
         }
+
+        // Função para salvar a posição do scroll
+        function saveScroll() {
+            sessionStorage.setItem('scrollPosition', window.scrollY);
+        }
+
+        // Restaura a posição do scroll se houver algo salvo
+        if (sessionStorage.getItem('scrollPosition')) {
+            window.scrollTo(0, sessionStorage.getItem('scrollPosition'));
+            sessionStorage.removeItem('scrollPosition');
+        }
+
+        // Mantém a posição da página ao filtrar
+        document.getElementById('formFiltros').addEventListener('submit', function(e) {
+            e.preventDefault();
+            saveScroll();
+            const params = new URLSearchParams(new FormData(this)).toString();
+            window.location.href = '?' + params;
+        });
     </script>
 {% endblock %}
