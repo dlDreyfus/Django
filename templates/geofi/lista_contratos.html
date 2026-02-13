@@ -10,6 +10,8 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <!-- Estilo Gov.br -->
     <link rel="stylesheet" href="{% static 'geofi/css/style.css' %}">
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
     <style>
         .chart-wrapper {
@@ -168,21 +170,7 @@
             },
             options: {
                 responsive: true,
-                maintainAspectRatio: false,
-                plugins: {
-                    zoom: {
-                        zoom: {
-                            wheel: { enabled: true },
-                            pinch: { enabled: true },
-                            mode: 'xy',
-                        },
-                        pan: {
-                            enabled: true,
-                            mode: 'xy',
-                            threshold: 10
-                        }
-                    }
-                }
+                maintainAspectRatio: false
             }
         });
     </script>
